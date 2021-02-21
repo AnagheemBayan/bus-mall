@@ -98,12 +98,12 @@ function handleClicking(event){
             arr[imageIndex2].count++;
 
         }
-        else {
+        else if (event.target.id === 'imgEl3') {
             arr[imageIndex3].count++;
         }
         renderThreeRandomImages();
      
-
+ 
     }
     else {
       let result = document.getElementById('result')
