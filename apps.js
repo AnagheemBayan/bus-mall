@@ -2,7 +2,10 @@
 let max = 25;
 let attemps=0;
 let arr =[];
-
+let arrName=[];
+let arrCounts=[];
+let arrShowen=[];
+let arrayOf=[];
 let img1 = document.getElementById('imgEl1')
 let img2 = document.getElementById('imgEl2')
 let img3 = document.getElementById('imgEl3')
@@ -14,6 +17,8 @@ function products(name, filename){
     this.count=0;
     this.numofDisplay=0;
     arr.push(this);
+    arrName.push(this.name);
+  
 
 }
 
@@ -32,23 +37,24 @@ new products('Pet-sweep','img/pet-sweep.jpg');
 new products ('scissors','img/scissors.jpg');
 new products('shark','img/shark.jpg');
 new products('sweep','img/sweep.png');
-new products('tauntaun','img/tauntaun.jpg');
+  new products('tauntaun','img/tauntaun.jpg');
 new products('unicorn','img/unicorn.jpg');
 new products('usb','img/usb.gif');
 new products('water-can','img/water-can.jpg');
 new products('wine-glass','img/wine-glass.jpg');
-console.log(arr);
+// console.log(arr);
 
 let imageIndex1;
 let imageIndex2;
 let imageIndex3;
+
 function renderThreeRandomImages(){
 
     imageIndex1=generateRandomIndex();
+    
     imageIndex2=generateRandomIndex();
     imageIndex3=generateRandomIndex();
-   
-  
+
     while(imageIndex1 === imageIndex2){
         imageIndex1 =generateRandomIndex();
 
@@ -60,6 +66,7 @@ function renderThreeRandomImages(){
     while(imageIndex2 === imageIndex3){
         imageIndex2=generateRandomIndex();
     }
+ 
     arr[imageIndex1].numofDisplay++;
     arr[imageIndex2].numofDisplay++;
     arr[imageIndex3].numofDisplay++;
@@ -68,17 +75,24 @@ img1.setAttribute('src',arr[imageIndex1].src)
 img2.setAttribute('src',arr[imageIndex2].src)
 img3.setAttribute('src',arr[imageIndex3].src)   
 
+arrayOf[0] = imageIndex1;
+arrayOf[1] = imageIndex2;
+arrayOf[2] = imageIndex3;
+
+// console.log(arrayOf);
 }
 
 renderThreeRandomImages();
 
-
 function generateRandomIndex(){
- 
+          
 let random = Math.floor(Math.random() * arr.length);
-return random ;
+while (arrayOf.includes(random)){
+    random = Math.floor(Math.random() * arr.length);
+    
 
- 
+};
+return random;
 }
 
 contanier.addEventListener('click',handleClicking)
@@ -88,7 +102,7 @@ contanier.addEventListener('click',handleClicking)
 
 function handleClicking(event){
     attemps++;
-    console.log(event);
+    console.log(arrayOf);
     if(attemps<=max){
       
         if(event.target.id ==='imgEl1' ){
@@ -114,6 +128,13 @@ function handleClicking(event){
           li.textContent=`${arr[i].name }Has ${arr[i].count} Counts and Showen ${arr[i].numofDisplay } Times `
       
         }
+
+        for(let j=0;j<arr.length;j++){
+            arrCounts.push(arr[j].count);
+            arrShowen.push(arr[j].numofDisplay);
+        }
+
+    chartRender();
         document.getElementById('userResult').style.display='block';
 
 
@@ -130,3 +151,35 @@ function handleClicking(event){
 function showResult(){
     document.getElementById('result').style.display="block";
 }
+function chartRender(){
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        
+        type: 'bar',
+    
+        
+        data: {
+            labels: arrName,
+            datasets: [{
+                label: 'Images Count',
+                   backgroundColor: '#290149',
+                borderColor:'#f14668',               
+                data: arrCounts,
+            },{
+                label: 'Imagees Showen',
+                backgroundColor: '#6b011f',
+             
+                borderColor:'rgb(180,100,200)',
+                data:arrShowen,
+    
+            }]
+        },
+    
+
+        options: {}
+    });
+    
+ 
+    }
+
+  
