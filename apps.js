@@ -11,16 +11,18 @@ let img2 = document.getElementById('imgEl2')
 let img3 = document.getElementById('imgEl3')
 let contanier= document.getElementById('contanier')
 
+
 function products(name, filename){
     this.name=name;
     this.src = filename;
     this.count=0;
-    this.numofDisplay=0;
+    // this.numofDisplay=0;
     arr.push(this);
+    
     arrName.push(this.name);
-  
 
 }
+
 
 new products('Bag' , 'img/bag.jpg');
 new products('Banana','img/banana.jpg');
@@ -37,16 +39,18 @@ new products('Pet-sweep','img/pet-sweep.jpg');
 new products ('scissors','img/scissors.jpg');
 new products('shark','img/shark.jpg');
 new products('sweep','img/sweep.png');
-  new products('tauntaun','img/tauntaun.jpg');
+new products('tauntaun','img/tauntaun.jpg');
 new products('unicorn','img/unicorn.jpg');
 new products('usb','img/usb.gif');
 new products('water-can','img/water-can.jpg');
 new products('wine-glass','img/wine-glass.jpg');
-// console.log(arr);
+
+
 
 let imageIndex1;
 let imageIndex2;
 let imageIndex3;
+
 
 function renderThreeRandomImages(){
 
@@ -67,9 +71,9 @@ function renderThreeRandomImages(){
         imageIndex2=generateRandomIndex();
     }
  
-    arr[imageIndex1].numofDisplay++;
-    arr[imageIndex2].numofDisplay++;
-    arr[imageIndex3].numofDisplay++;
+    // arr[imageIndex1].numofDisplay++;
+    // arr[imageIndex2].numofDisplay++;
+    // arr[imageIndex3].numofDisplay++;
 
 img1.setAttribute('src',arr[imageIndex1].src)
 img2.setAttribute('src',arr[imageIndex2].src)
@@ -101,12 +105,14 @@ contanier.addEventListener('click',handleClicking)
 
 
 function handleClicking(event){
+    
     attemps++;
     console.log(arrayOf);
     if(attemps<=max){
-      
+        console.log('from event con'+ arr);
         if(event.target.id ==='imgEl1' ){
             arr[imageIndex1].count++;
+            
         }
         else if (event.target.id ==='imgEl2'){
             arr[imageIndex2].count++;
@@ -115,8 +121,8 @@ function handleClicking(event){
         else if (event.target.id === 'imgEl3') {
             arr[imageIndex3].count++;
         }
+       
         renderThreeRandomImages();
-     
  
     }
     else {
@@ -125,22 +131,22 @@ function handleClicking(event){
       for(let i =0 ;i<arr.length; i++){
           li=document.createElement('li');
           result.appendChild(li);
-          li.textContent=`${arr[i].name }Has ${arr[i].count} Counts and Showen ${arr[i].numofDisplay } Times `
+          li.textContent=`${arr[i].name }Has ${arr[i].count} Counts`
+         
       
         }
 
         for(let j=0;j<arr.length;j++){
             arrCounts.push(arr[j].count);
-            arrShowen.push(arr[j].numofDisplay);
+            // arrShowen.push(arr[j].numofDisplay);
         }
-
-    chartRender();
+        chartRender();
         document.getElementById('userResult').style.display='block';
-
-
-
-      contanier.removeEventListener('click', handleClicking)
-   
+        
+        
+        contanier.removeEventListener('click', handleClicking);
+        countImage();
+    
     
     }
 
@@ -149,8 +155,11 @@ function handleClicking(event){
 
 
 function showResult(){
+     
     document.getElementById('result').style.display="block";
+
 }
+
 function chartRender(){
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -182,4 +191,28 @@ function chartRender(){
  
     }
 
-  
+    function countImage(){
+
+        let product =JSON.stringify(arr);
+        localStorage.setItem('arrayOfObjects',product);
+        console.log(product);
+
+    }
+function getCountImage(){
+
+    let getCount= localStorage.getItem('arrayOfObjects');
+     let result= JSON.parse(getCount);
+    console.log(result);
+    if(result){
+        arr=result;
+    }
+    else{
+        arr=[];
+
+    }
+     
+  renderThreeRandomImages();
+}
+
+getCountImage(); 
+
