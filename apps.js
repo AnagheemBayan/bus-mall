@@ -86,7 +86,7 @@ arrayOf[2] = imageIndex3;
 // console.log(arrayOf);
 }
 
-renderThreeRandomImages();
+
 
 function generateRandomIndex(){
           
@@ -160,6 +160,25 @@ function showResult(){
 
 }
 
+function countImage(){
+
+    let product =JSON.stringify(arr);
+    localStorage.setItem('arrayOfObjects',product);
+    console.log(product);
+
+}
+function getCountImage(){
+
+let getCount= localStorage.getItem('arrayOfObjects');
+ let result= JSON.parse(getCount);
+console.log(result);
+if(result){
+    arr=result;
+}
+
+ 
+renderThreeRandomImages();
+}
 function chartRender(){
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -191,24 +210,7 @@ function chartRender(){
  
     }
 
-    function countImage(){
 
-        let product =JSON.stringify(arr);
-        localStorage.setItem('arrayOfObjects',product);
-        console.log(product);
-
-    }
-function getCountImage(){
-
-    let getCount= localStorage.getItem('arrayOfObjects');
-     let result= JSON.parse(getCount);
-    console.log(result);
-    if(result){
-        arr=result;
-    }
-     
-  renderThreeRandomImages();
-}
 
 getCountImage(); 
 
