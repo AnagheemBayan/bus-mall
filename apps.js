@@ -51,53 +51,52 @@ let imageIndex1;
 let imageIndex2;
 let imageIndex3;
 
-
+renderThreeRandomImages();
 function renderThreeRandomImages(){
-
+    
     imageIndex1=generateRandomIndex();
     
     imageIndex2=generateRandomIndex();
     imageIndex3=generateRandomIndex();
-
+    
     while(imageIndex1 === imageIndex2){
         imageIndex1 =generateRandomIndex();
-
+        
     }
     while(imageIndex1 === imageIndex3){
         imageIndex3 = generateRandomIndex();
-
+        
     }
     while(imageIndex2 === imageIndex3){
         imageIndex2=generateRandomIndex();
     }
- 
+    
     // arr[imageIndex1].numofDisplay++;
     // arr[imageIndex2].numofDisplay++;
     // arr[imageIndex3].numofDisplay++;
-
-img1.setAttribute('src',arr[imageIndex1].src)
-img2.setAttribute('src',arr[imageIndex2].src)
-img3.setAttribute('src',arr[imageIndex3].src)   
-
-arrayOf[0] = imageIndex1;
-arrayOf[1] = imageIndex2;
-arrayOf[2] = imageIndex3;
-
-// console.log(arrayOf);
+    
+    img1.setAttribute('src',arr[imageIndex1].src)
+    img2.setAttribute('src',arr[imageIndex2].src)
+    img3.setAttribute('src',arr[imageIndex3].src)   
+    
+    arrayOf[0] = imageIndex1;
+    arrayOf[1] = imageIndex2;
+    arrayOf[2] = imageIndex3;
+    
+    // console.log(arrayOf);
 }
-countImage();
 
 
 
 function generateRandomIndex(){
-          
-let random = Math.floor(Math.random() * arr.length);
-while (arrayOf.includes(random)){
-    random = Math.floor(Math.random() * arr.length);
     
-
-};
-return random;
+    let random = Math.floor(Math.random() * arr.length);
+    while (arrayOf.includes(random)){
+        random = Math.floor(Math.random() * arr.length);
+        
+        
+    };
+    return random;
 }
 
 contanier.addEventListener('click',handleClicking)
@@ -110,33 +109,35 @@ function handleClicking(event){
     attemps++;
     console.log(arrayOf);
     if(attemps<=max){
-        console.log('from event con'+ arr);
+        
         if(event.target.id ==='imgEl1' ){
             arr[imageIndex1].count++;
             
         }
         else if (event.target.id ==='imgEl2'){
             arr[imageIndex2].count++;
-
+            
         }
         else if (event.target.id === 'imgEl3') {
             arr[imageIndex3].count++;
         }
-       
+        
+        
         renderThreeRandomImages();
- 
+        
     }
     else {
-      let result = document.getElementById('result')
-      let li ;
-      for(let i =0 ;i<arr.length; i++){
-          li=document.createElement('li');
-          result.appendChild(li);
-          li.textContent=`${arr[i].name }Has ${arr[i].count} Counts`
-         
-      
+        let result = document.getElementById('result')
+        let li ;
+        for(let i =0 ;i<arr.length; i++){
+            li=document.createElement('li');
+            result.appendChild(li);
+            li.textContent=`${arr[i].name }Has ${arr[i].count} Counts`
+            
+            
         }
-
+        
+        countImage();
         for(let j=0;j<arr.length;j++){
             arrCounts.push(arr[j].count);
             // arrShowen.push(arr[j].numofDisplay);
@@ -144,13 +145,12 @@ function handleClicking(event){
         chartRender();
         document.getElementById('userResult').style.display='block';
         
-        
         contanier.removeEventListener('click', handleClicking);
         
         
         
+        
     }
-    
     
 }
 
@@ -164,7 +164,7 @@ function countImage(){
     
     let product =JSON.stringify(arr);
     localStorage.setItem('arrayOfObjects',product);
-    console.log(product);
+    
     
 }
 function getCountImage(){
@@ -175,9 +175,9 @@ function getCountImage(){
     if(result){
         arr=result;
     }
-  
     
-    // renderThreeRandomImages();
+    
+    renderThreeRandomImages();
 }
 
 function chartRender(){
