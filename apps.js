@@ -87,7 +87,7 @@ arrayOf[2] = imageIndex3;
 }
 countImage();
 
-renderThreeRandomImages();
+
 
 function generateRandomIndex(){
           
@@ -179,7 +179,6 @@ function getCountImage(){
     
     // renderThreeRandomImages();
 }
-
 
 function chartRender(){
     var ctx = document.getElementById('myChart').getContext('2d');
