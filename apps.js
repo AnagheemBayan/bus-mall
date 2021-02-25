@@ -85,6 +85,7 @@ arrayOf[2] = imageIndex3;
 
 // console.log(arrayOf);
 }
+countImage();
 
 renderThreeRandomImages();
 
@@ -145,19 +146,19 @@ function handleClicking(event){
         
         
         contanier.removeEventListener('click', handleClicking);
-        countImage();
-    
-    
+        
+        
+        
     }
-
- 
+    
+    
 }
 
 
 function showResult(){
-     
+    
     document.getElementById('result').style.display="block";
-
+    
 }
 
 function chartRender(){
@@ -165,49 +166,52 @@ function chartRender(){
     var chart = new Chart(ctx, {
         
         type: 'bar',
-    
+        
         
         data: {
             labels: arrName,
             datasets: [{
                 label: 'Images Count',
-                   backgroundColor: '#290149',
+                backgroundColor: '#290149',
                 borderColor:'#f14668',               
                 data: arrCounts,
             },{
                 label: 'Imagees Showen',
                 backgroundColor: '#6b011f',
-             
+                
                 borderColor:'rgb(180,100,200)',
                 data:arrShowen,
-    
+                
             }]
         },
-    
-
+        
+        
         options: {}
     });
     
- 
-    }
+    
+}
 
-    function countImage(){
-
-        let product =JSON.stringify(arr);
-        localStorage.setItem('arrayOfObjects',product);
-        console.log(product);
-
-    }
+function countImage(){
+    
+    let product =JSON.stringify(arr);
+    localStorage.setItem('arrayOfObjects',product);
+    console.log(product);
+    
+}
 function getCountImage(){
-
+    
     let getCount= localStorage.getItem('arrayOfObjects');
-     let result= JSON.parse(getCount);
+    let result= JSON.parse(getCount);
     console.log(result);
     if(result){
         arr=result;
     }
-     
-  renderThreeRandomImages();
+    else{
+        arr=[];
+    }
+    
+    // renderThreeRandomImages();
 }
 
 getCountImage(); 
