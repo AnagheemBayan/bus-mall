@@ -160,6 +160,26 @@ function showResult(){
     document.getElementById('result').style.display="block";
     
 }
+function countImage(){
+    
+    let product =JSON.stringify(arr);
+    localStorage.setItem('arrayOfObjects',product);
+    console.log(product);
+    
+}
+function getCountImage(){
+    
+    let getCount= localStorage.getItem('arrayOfObjects');
+    let result= JSON.parse(getCount);
+    console.log(result);
+    if(result){
+        arr=result;
+    }
+  
+    
+    // renderThreeRandomImages();
+}
+
 
 function chartRender(){
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -190,28 +210,6 @@ function chartRender(){
     });
     
     
-}
-
-function countImage(){
-    
-    let product =JSON.stringify(arr);
-    localStorage.setItem('arrayOfObjects',product);
-    console.log(product);
-    
-}
-function getCountImage(){
-    
-    let getCount= localStorage.getItem('arrayOfObjects');
-    let result= JSON.parse(getCount);
-    console.log(result);
-    if(result){
-        arr=result;
-    }
-    else{
-        arr=[];
-    }
-    
-    // renderThreeRandomImages();
 }
 
 getCountImage(); 
