@@ -107,7 +107,7 @@ contanier.addEventListener('click',handleClicking)
 function handleClicking(event){
     
     attemps++;
-    console.log(arrayOf);
+    // console.log(arrayOf);
     if(attemps<=max){
         console.log('from event con'+ arr);
         if(event.target.id ==='imgEl1' ){
@@ -122,7 +122,7 @@ function handleClicking(event){
             arr[imageIndex3].count++;
         }
        
-        renderThreeRandomImages();
+        // renderThreeRandomImages();
  
     }
     else {
@@ -195,7 +195,7 @@ function chartRender(){
 
         let product =JSON.stringify(arr);
         localStorage.setItem('arrayOfObjects',product);
-        console.log(product);
+        // console.log(product);
 
     }
 function getCountImage(){
@@ -206,10 +206,7 @@ function getCountImage(){
     if(result){
         arr=result;
     }
-    else{
-        arr=[];
-
-    }
+    
      
   renderThreeRandomImages();
 }
