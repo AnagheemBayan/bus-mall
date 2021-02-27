@@ -50,7 +50,6 @@ new products('wine-glass','img/wine-glass.jpg');
 let imageIndex1;
 let imageIndex2;
 let imageIndex3;
-
 renderThreeRandomImages();
 function renderThreeRandomImages(){
     
@@ -59,31 +58,35 @@ function renderThreeRandomImages(){
     imageIndex2=generateRandomIndex();
     imageIndex3=generateRandomIndex();
     
-    while(imageIndex1 === imageIndex2){
-        imageIndex1 =generateRandomIndex();
+    // while(imageIndex1 === imageIndex2){
+        //     imageIndex1 =generateRandomIndex();
         
-    }
-    while(imageIndex1 === imageIndex3){
-        imageIndex3 = generateRandomIndex();
+        // }
+        // while(imageIndex1 === imageIndex3){
+    //     imageIndex3 = generateRandomIndex();
+    
+    // }
+    // while(imageIndex2 === imageIndex3){
+        //     imageIndex2=generateRandomIndex();
+        // }
+        while(imageIndex1 === imageIndex2 || imageIndex1=== imageIndex3 || imageIndex2=== imageIndex3){
+            imageIndex1=generateRandomIndex();
+            imageIndex2=generateRandomIndex();
+        }
         
-    }
-    while(imageIndex2 === imageIndex3){
-        imageIndex2=generateRandomIndex();
-    }
+        // arr[imageIndex1].numofDisplay++;
+        // arr[imageIndex2].numofDisplay++;
+        // arr[imageIndex3].numofDisplay++;
+        
+        img1.setAttribute('src',arr[imageIndex1].src)
+        img2.setAttribute('src',arr[imageIndex2].src)
+        img3.setAttribute('src',arr[imageIndex3].src)   
+        
+        arrayOf[0] = imageIndex1;
+        arrayOf[1] = imageIndex2;
+        arrayOf[2] = imageIndex3;
     
-    // arr[imageIndex1].numofDisplay++;
-    // arr[imageIndex2].numofDisplay++;
-    // arr[imageIndex3].numofDisplay++;
-    
-    img1.setAttribute('src',arr[imageIndex1].src)
-    img2.setAttribute('src',arr[imageIndex2].src)
-    img3.setAttribute('src',arr[imageIndex3].src)   
-    
-    arrayOf[0] = imageIndex1;
-    arrayOf[1] = imageIndex2;
-    arrayOf[2] = imageIndex3;
-    
-    // console.log(arrayOf);
+        // console.log(arrayOf);
 }
 
 
@@ -124,7 +127,6 @@ function handleClicking(event){
         
         
         renderThreeRandomImages();
-        
     }
     else {
         let result = document.getElementById('result')
@@ -135,9 +137,11 @@ function handleClicking(event){
             li.textContent=`${arr[i].name }Has ${arr[i].count} Counts`
             
             
+            
+            countImage();
+            
         }
         
-        countImage();
         for(let j=0;j<arr.length;j++){
             arrCounts.push(arr[j].count);
             // arrShowen.push(arr[j].numofDisplay);
